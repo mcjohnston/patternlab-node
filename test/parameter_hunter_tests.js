@@ -2,6 +2,8 @@
 	"use strict";
 
 	var ph = require('../builder/parameter_hunter');
+    var pa = require('../builder/pattern_assembler');
+    var object_factory = require('../builder/object_factory');
 
 	exports['parameter_hunter'] = {
 		'pattern hunter finds and extends templates' : function(test){
@@ -215,7 +217,66 @@
       test.equals(currentPattern.extendedTemplate, '<p>A life is like a garden. Perfect moments can be had, but not preserved, except in memory.</p>');
 
       test.done();
-    }
+    },
+    'pattern hunter findPatterns calls itself when encountering a partial that has parameters itself' : function(test){
+
+         // this test utilizes pattern_assembler for the heavy lifting, but the actual code being tested resides inside pattern_hunter.js
+         //arrange
+         var fs = require('fs-extra');
+         var pattern_assembler = new pa();
+         var patterns_dir = './test/files/_patterns';
+
+         var pl = {};
+         pl.config = {
+             paths: {
+                 source: {
+                     patterns: patterns_dir
+                 }
+             }
+         };
+         pl.data = {};
+         pl.data.link = {};
+         pl.config.debug = false;
+         pl.patterns = [];
+         pl.partials = {};
+
+         var atomPattern = new object_factory.oPattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
+         atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/01-bar.mustache', 'utf8');
+         atomPattern.extendedTemplate = atomPattern.template;
+         atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
+         atomPattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(atomPattern);
+
+         var stylePattern = new object_factory.oPattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
+         stylePattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
+         stylePattern.extendedTemplate = stylePattern.template;
+         stylePattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(stylePattern);
+         stylePattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(stylePattern);
+
+         var innerParameteredPattern = new object_factory.oPattern('test/files/_patterns/00-test/12-parameter-partial.mustache', '00-test', '12-parameter-partial.mustache');
+         innerParameteredPattern.template = fs.readFileSync(patterns_dir + '/00-test/12-parameter-partial.mustache', 'utf8');
+         innerParameteredPattern.extendedTemplate = innerParameteredPattern.template;
+         innerParameteredPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(innerParameteredPattern);
+         innerParameteredPattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(innerParameteredPattern);
+
+         var outerParameteredPattern = new object_factory.oPattern('test/files/_patterns/00-test/13-another-parameter-partial.mustache', '00-test', '13-another-parameter-partial.mustache');
+         outerParameteredPattern.template = fs.readFileSync(patterns_dir + '/00-test/13-another-parameter-partial.mustache', 'utf8');
+         outerParameteredPattern.extendedTemplate = outerParameteredPattern.template;
+         outerParameteredPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(outerParameteredPattern);
+         outerParameteredPattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(outerParameteredPattern);
+
+         pattern_assembler.addPattern(atomPattern, pl);
+         pattern_assembler.addPattern(stylePattern, pl);
+         pattern_assembler.addPattern(innerParameteredPattern, pl);
+         pattern_assembler.addPattern(outerParameteredPattern, pl);
+
+         //act
+         pattern_assembler.process_pattern_recursive('test/files/_patterns/00-test/13-another-parameter-partial.mustache', pl, {});
+
+         //assert.
+         var expectedValue = 'bar <span class="test_base baz"> foo </span> bar bar';
+         test.equals(outerParameteredPattern.extendedTemplate.replace(/\s\s+/g, ' ').replace(/\n/g, ' ').trim(), expectedValue.trim());
+         test.done();
+     }
 
   };
 

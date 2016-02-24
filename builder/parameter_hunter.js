@@ -52,9 +52,9 @@
 					//if param keys are wrapped in single quotes, replace with double quotes.
 					var paramStringWellFormed = paramString.replace(/(')([^']+)(')(\s*\:)/gm, '"$2"$4');
 					//if params keys are not wrapped in any quotes, wrap in double quotes.
-					var paramStringWellFormed = paramStringWellFormed.replace(/([\{|,]\s*)([^\:\s]+)(\s*\:)/gm, '$1"$2"$3');
+					paramStringWellFormed = paramStringWellFormed.replace(/([\{|,]\s*)([^\:\s]+)(\s*\:)/gm, '$1"$2"$3');
 					//if param values are wrapped in single quotes, replace with double quotes.
-					var paramStringWellFormed = paramStringWellFormed.replace(/(\:\s*)(')([^']+)(')/gm, '$1"$3"');
+					paramStringWellFormed = paramStringWellFormed.replace(/(\:\s*)(')([^']+)(')/gm, '$1"$3"');
 
 					var paramData = {};
 					var globalData = {};
