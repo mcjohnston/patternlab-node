@@ -26,6 +26,11 @@
 					console.log('found partial styleModifier within pattern ' + pattern.key);
 				}
 
+				//set the extendedTemplate in case its empty
+				if (!pattern.extendedTemplate){
+					pattern.extendedTemplate = pattern.template;
+				}
+
 				//replace the stylemodifier placeholder with the class name
 				pattern.extendedTemplate = pattern.extendedTemplate.replace(/{{[ ]?styleModifier[ ]?}}/i, styleModifier);
 

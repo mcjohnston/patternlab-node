@@ -28,8 +28,18 @@
 					//find the partial's name and retrieve it
 					var partialName = pMatch.match(/([\w\-\.\/~]+)/g)[0];
 					var partialPattern = pattern_assembler.get_pattern_by_key(partialName, patternlab);
+
 					//if we retrieved a pattern we should make sure that its extendedTemplate is reset. looks to fix #190
 					partialPattern.extendedTemplate = partialPattern.template;
+
+					//if a partial has parameters, we need to call findParamaters on it
+					if(partialPattern.parameteredPartials && partialPattern.parameteredPartials.length > 0){
+						if(patternlab.config.debug){
+							console.log('while evaluating ' + pattern.key + ' for  partialPatterns with parameters, determined ' + partialPattern.key + ' has parameters itself. resetting its template and calling findparameters on it');
+						}
+						//call find parameters recursively
+						findparameters(partialPattern, patternlab);
+					}
 
 					if(patternlab.config.debug){
 						console.log('found patternParameters for ' + partialName);
