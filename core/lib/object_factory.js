@@ -16,12 +16,16 @@ var extend = require('util')._extend;
 
 // Pattern properties
 
-var Pattern = function (abspath, subdir, filename, data) {
-  this.fileName = filename.substring(0, filename.indexOf('.'));
-  this.fileExtension = path.extname(abspath);
-  this.abspath = abspath;
-  this.subdir = subdir;
-  this.name = subdir.replace(/[\/\\]/g, '-') + '-' + this.fileName; //this is the unique name with the subDir
+var Pattern = function (givenPath, data) {
+  debugger;
+  // ensure the path we're passed is absolute
+  var absPath = path.resolve(givenPath);
+  var pathObj = path.parse(absPath);
+  this.abspath = absPath;
+  this.fileName = pathObj.name;
+  this.fileExtension = pathObj.ext;
+  this.subdir = pathObj.dir.split(path.sep).slice(-2).join(path.sep); 
+  this.name = this.subdir.replace(/[\/\\]/g, '-') + '-' + this.fileName; //this is the unique name with the subDir 
   this.jsonFileData = data || {};
   this.patternName = this.fileName.replace(/^\d*\-/, '');
   this.patternDisplayName = this.patternName.split('-').reduce(function (val, working) {
@@ -29,8 +33,8 @@ var Pattern = function (abspath, subdir, filename, data) {
   }, '').trim(); //this is the display name for the ui. strip numeric + hyphen prefixes
   this.patternLink = this.name + '/' + this.name + '.html';
   this.patternGroup = this.name.substring(this.name.indexOf('-') + 1, this.name.indexOf('-', 4) + 1 - this.name.indexOf('-') + 1);
-  this.patternSubGroup = subdir.substring(subdir.indexOf('/') + 4);
-  this.flatPatternPath = subdir.replace(/[\/\\]/g, '-');
+  this.patternSubGroup = this.subdir.substring(this.subdir.indexOf('/') + 4);
+  this.flatPatternPath = this.subdir.replace(/[\/\\]/g, '-');
   this.key = this.patternGroup + '-' + this.patternName;
   this.template = '';
   this.patternPartial = '';
