@@ -129,7 +129,6 @@ var pattern_assembler = function () {
 
   function processPatternIterative(file, patternlab) {
     //extract some information
-    var subdir = path.dirname(path.relative(patternlab.config.paths.source.patterns, file)).replace('\\', '/');
     var filename = path.basename(file);
     var ext = path.extname(filename);
 
@@ -137,7 +136,7 @@ var pattern_assembler = function () {
     if (!patternEngines.isPatternFile(filename, patternlab)) { return null; }
 
     //make a new Pattern Object
-    var currentPattern = new Pattern(file, subdir, filename);
+    var currentPattern = new Pattern(file);
 
     //if file is named in the syntax for variants
     if (patternEngines.isPseudoPatternJSON(filename)) {

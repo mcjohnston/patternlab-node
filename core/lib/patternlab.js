@@ -116,7 +116,7 @@ var patternlab_engine = function (config) {
           console.log(err);
           return;
         }
-        pattern_assembler.process_pattern_iterative(path.resolve(file), patternlab);
+        pattern_assembler.process_pattern_iterative(file, patternlab);
       });
 
     //diveSync again to recursively include partials, filling out the
@@ -139,7 +139,7 @@ var patternlab_engine = function (config) {
           console.log(err);
           return;
         }
-        pattern_assembler.process_pattern_recursive(path.resolve(file), patternlab);
+        pattern_assembler.process_pattern_recursive(file, patternlab);
       });
 
     //set user defined head and foot if they exist
