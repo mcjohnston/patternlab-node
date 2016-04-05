@@ -91,9 +91,9 @@ var pattern_assembler = function () {
     //only push to array if the array doesn't contain this pattern
     var isNew = true;
     for (var i = 0; i < patternlab.patterns.length; i++) {
-      //so we need the identifier to be unique, which patterns[i].abspath is
-      if (pattern.abspath === patternlab.patterns[i].abspath) {
-        //if abspath already exists, overwrite that element
+      //so we need the identifier to be unique, which patterns[i].relPath is
+      if (pattern.relPath === patternlab.patterns[i].relPath) {
+        //if relPath already exists, overwrite that element
         patternlab.patterns[i] = pattern;
         patternlab.partials[pattern.key] = pattern.extendedTemplate || pattern.template;
         isNew = false;
@@ -217,9 +217,9 @@ var pattern_assembler = function () {
       //identify which pattern this partial corresponds to
       for (var j = 0; j < patternlab.patterns.length; j++) {
         if (patternlab.patterns[j].key === partialKey ||
-           patternlab.patterns[j].abspath.indexOf(partialKey) > -1)
+           patternlab.patterns[j].relPath.indexOf(partialKey) > -1)
         {
-          partialPath = patternlab.patterns[j].abspath;
+          partialPath = patternlab.patterns[j].relPath;
         }
       }
 
@@ -251,7 +251,7 @@ var pattern_assembler = function () {
     var currentPattern, i;
 
     for (i = 0; i < patternlab.patterns.length; i++) {
-      if (patternlab.patterns[i].abspath === file) {
+      if (patternlab.patterns[i].relPath === file) {
         currentPattern = patternlab.patterns[i];
       }
     }

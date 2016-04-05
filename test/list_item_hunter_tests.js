@@ -8,12 +8,10 @@
   // fake pattern creators
   function createFakeListPattern(customProps) {
     var inputs = {
-      abspath: '/home/fakeuser/pl/source/_patterns/01-molecules/01-lists/00-list.mustache',
-      subdir: '01-molecules\\01-lists',
-      filename: '00-list.mustache',
+      relPath: '01-molecules/01-lists/00-list.mustache',
       data: {}
     };
-    var pattern = new Pattern(inputs.abspath, inputs.subdir, inputs.filename, inputs.data);
+    var pattern = new Pattern(inputs.relPath);
 
     return extend(pattern, customProps);
   }
@@ -317,12 +315,12 @@
         ]
       };
 
-      var atomPattern = new Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
+      var atomPattern = new Pattern('test/files/_patterns/00-test/03-styled-atom.mustache');
       atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
       atomPattern.extendedTemplate = atomPattern.template;
       atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
 
-      var bookendPattern = new Pattern('test/files/_patterns/00-test/11-bookend-listitem.mustache', '00-test', '11-bookend-listitem.mustache');
+      var bookendPattern = new Pattern('test/files/_patterns/00-test/11-bookend-listitem.mustache');
       bookendPattern.template = fs.readFileSync(patterns_dir + '/00-test/11-bookend-listitem.mustache', 'utf8');
       bookendPattern.extendedTemplate = bookendPattern.template;
       bookendPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(bookendPattern);

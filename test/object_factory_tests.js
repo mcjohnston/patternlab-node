@@ -5,10 +5,9 @@
   var Pattern = require('../core/lib/object_factory').Pattern;
 
 	exports['Pattern initialization'] = {
-		'test Pattern initializes correctly' : function(test){
-			var p = new Pattern('source/_patterns/00-atoms/00-global/00-colors.mustache', { d: 123});
+		'test Pattern initializes correctly' : function (test) {
+			var p = new Pattern('00-atoms/00-global/00-colors.mustache', { d: 123});
 			test.equals(p.name, '00-atoms-00-global-00-colors');
-			test.equals(p.abspath, 'source/_patterns/00-atoms/00-global/00-colors.mustache');
 			test.equals(p.subdir, '00-atoms/00-global');
 			test.equals(p.fileName, '00-colors');
 			test.equals(p.fileExtension, '.mustache');
@@ -28,14 +27,35 @@
 			test.equals(p.lineageRIndex.length, 0);
 			test.done();
 		},
+        'test Pattern with one-directory subdir works as expected' : function (test) {
+		  var p = new Pattern('00-atoms/00-colors.mustache', { d: 123});
+		  test.equals(p.name, '00-atoms-00-colors');
+		  test.equals(p.subdir, '00-atoms');
+		  test.equals(p.fileName, '00-colors');
+		  test.equals(p.fileExtension, '.mustache');
+		  test.equals(p.jsonFileData.d, 123);
+		  test.equals(p.patternName, 'colors');
+		  test.equals(p.patternDisplayName, 'Colors');
+		  test.equals(p.patternLink, '00-atoms-00-colors/00-atoms-00-colors.html');
+		  test.equals(p.patternGroup, 'atoms');
+		  test.equals(p.flatPatternPath, '00-atoms');
+		  test.equals(p.key, 'atoms-colors');
+		  test.equals(p.template, '');
+		  test.equals(p.patternPartial, '');
+		  test.equals(p.lineage.length, 0);
+		  test.equals(p.lineageIndex.length, 0);
+		  test.equals(p.lineageR.length, 0);
+		  test.equals(p.lineageRIndex.length, 0);
+		  test.done();
+	    },
 		'test Pattern capitalizes patternDisplayName correctly' : function(test){
-			var p = new Pattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', '00-atoms/00-global', '00-colors-alt.mustache', { d: 123});
+			var p = new Pattern('00-atoms/00-global/00-colors-alt.mustache', { d: 123});
 			test.equals(p.patternName, 'colors-alt');
 			test.equals(p.patternDisplayName, 'Colors Alt');
 			test.done();
 		},
 		'test Pattern removes pattern paramter from key correctly' : function(test){
-			var p = new Pattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', '00-atoms/00-global', '00-colors-alt.mustache', { d: 123});
+			var p = new Pattern('00-atoms/00-global/00-colors-alt.mustache', { d: 123});
 			test.equals(p.patternName, 'colors-alt');
 			test.equals(p.patternDisplayName, 'Colors Alt');
 			test.done();

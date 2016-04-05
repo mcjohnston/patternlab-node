@@ -51,9 +51,7 @@ function testFindPartials(test, partialTests) {
   // docs on partial syntax are here:
   // http://patternlab.io/docs/pattern-including.html
   var currentPattern = Pattern.create(
-    '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.twig', // abspath
-    '01-molecules\\00-testing', // subdir
-    '00-test-mol.twig', // filename,
+    '01-molecules/00-testing/00-test-mol.twig', // relative path now
     null, // data
     {
       template: partialTests.join()

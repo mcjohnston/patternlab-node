@@ -16,16 +16,14 @@ var extend = require('util')._extend;
 
 // Pattern properties
 
-var Pattern = function (givenPath, data) {
-  debugger;
+var Pattern = function (relPath, data) {
   // ensure the path we're passed is absolute
-  var absPath = path.resolve(givenPath);
-  var pathObj = path.parse(absPath);
-  this.abspath = absPath;
+  var pathObj = path.parse(relPath);
+  this.relPath = relPath;
   this.fileName = pathObj.name;
   this.fileExtension = pathObj.ext;
-  this.subdir = pathObj.dir.split(path.sep).slice(-2).join(path.sep); 
-  this.name = this.subdir.replace(/[\/\\]/g, '-') + '-' + this.fileName; //this is the unique name with the subDir 
+  this.subdir = pathObj.dir;
+  this.name = this.subdir.replace(/[\/\\]/g, '-') + '-' + this.fileName; //this is the unique name with the subDir
   this.jsonFileData = data || {};
   this.patternName = this.fileName.replace(/^\d*\-/, '');
   this.patternDisplayName = this.patternName.split('-').reduce(function (val, working) {
@@ -97,8 +95,8 @@ Pattern.createEmpty = function (customProps) {
 // factory: creates an Pattern object on-demand from a hash; the hash accepts
 // parameters that replace the positional parameters that the Pattern
 // constructor takes.
-Pattern.create = function (abspath, subdir, filename, data, customProps) {
-  var newPattern = new Pattern(abspath || '', subdir || '', filename || '', data || null);
+Pattern.create = function (relPath, data, customProps) {
+  var newPattern = new Pattern(relPath || '', data || null);
   return extend(newPattern, customProps);
 };
 

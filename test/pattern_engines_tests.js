@@ -5,9 +5,9 @@
   var Pattern = require('../core/lib/object_factory').Pattern;
 
   // the mustache test pattern, stolen from object_factory unit tests
-  var mustacheTestPattern = new Pattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', '00-atoms/00-global', '00-colors-alt.mustache', {d: 123});
-  var mustacheTestPseudoPatternBasePattern = new Pattern('source/_patterns/04-pages/00-homepage.mustache', '04-pages', '00-homepage.mustache', {d: 123});
-  var mustacheTestPseudoPattern = new Pattern('source/_patterns/04-pages/00-homepage~emergency.json', '04-pages', '00-homepage-emergency.', {d: 123});
+  var mustacheTestPattern = new Pattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', {d: 123});
+  var mustacheTestPseudoPatternBasePattern = new Pattern('source/_patterns/04-pages/00-homepage.mustache', {d: 123});
+  var mustacheTestPseudoPattern = new Pattern('source/_patterns/04-pages/00-homepage~emergency.json', {d: 123});
   mustacheTestPseudoPattern.isPseudoPattern = true;
   mustacheTestPseudoPattern.basePattern = mustacheTestPseudoPatternBasePattern;
   var engineNames = Object.keys(patternEngines);
