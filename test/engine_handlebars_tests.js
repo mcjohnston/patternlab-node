@@ -36,7 +36,7 @@ function fakePatternLab() {
 
   // patch the pattern source so the pattern assembler can correctly determine
   // the "subdir"
-  fpl.config.paths.source.patterns = './test/files/_handlebars-test-patterns';
+  fpl.config.paths.source.patterns = testPatternsPath;
 
   return fpl;
 }
@@ -73,12 +73,7 @@ exports['engine_handlebars'] = {
   'hello world handlebars pattern renders': function (test) {
     test.expect(1);
 
-    var patternPath = path.resolve(
-      testPatternsPath,
-      '00-atoms',
-      '00-global',
-      '00-helloworld.hbs'
-    );
+    var patternPath = path.join('00-atoms', '00-global', '00-helloworld.hbs');
 
     // do all the normal processing of the pattern
     var patternlab = new fakePatternLab();
@@ -93,18 +88,8 @@ exports['engine_handlebars'] = {
     test.expect(1);
 
     // pattern paths
-    var pattern1Path = path.resolve(
-      testPatternsPath,
-      '00-atoms',
-      '00-global',
-      '00-helloworld.hbs'
-    );
-    var pattern2Path = path.resolve(
-      testPatternsPath,
-      '00-molecules',
-      '00-global',
-      '00-helloworlds.hbs'
-    );
+    var pattern1Path = path.join('00-atoms', '00-global', '00-helloworld.hbs');
+    var pattern2Path = path.join('00-molecules', '00-global', '00-helloworlds.hbs');
 
     // set up environment
     var patternlab = new fakePatternLab(); // environment
@@ -124,12 +109,7 @@ exports['engine_handlebars'] = {
     test.expect(1);
 
     // pattern paths
-    var pattern1Path = path.resolve(
-      testPatternsPath,
-      '00-atoms',
-      '00-global',
-      '00-helloworld-withdata.hbs'
-    );
+    var pattern1Path = path.join('00-atoms', '00-global', '00-helloworld-withdata.hbs');
 
     // set up environment
     var patternlab = new fakePatternLab(); // environment
@@ -147,25 +127,15 @@ exports['engine_handlebars'] = {
     test.expect(1);
 
     // pattern paths
-    var atomPath = path.resolve(
-      testPatternsPath,
-      '00-atoms',
-      '00-global',
-      '00-helloworld-withdata.hbs'
-    );
-    var molPath = path.resolve(
-      testPatternsPath,
-      '00-molecules',
-      '00-global',
-      '00-call-atom-with-molecule-data.hbs'
-    );
+    var atomPath = path.join('00-atoms', '00-global', '00-helloworld-withdata.hbs');
+    var molPath = path.join('00-molecules', '00-global', '00-call-atom-with-molecule-data.hbs');
 
     // set up environment
     var patternlab = new fakePatternLab(); // environment
     var assembler = new pa();
 
     // do all the normal processing of the pattern
-    var atom = assembler.process_pattern_iterative(atomPath, patternlab);
+    assembler.process_pattern_iterative(atomPath, patternlab);
     var mol = assembler.process_pattern_iterative(molPath, patternlab);
     assembler.process_pattern_recursive(atomPath, patternlab);
     assembler.process_pattern_recursive(molPath, patternlab);
