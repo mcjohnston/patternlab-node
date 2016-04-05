@@ -505,8 +505,6 @@
 			pattern_assembler.addPattern(atomPattern, pl);
 			pattern_assembler.addPattern(bookendPattern, pl);
 
-      debugger;
-
 			//act
 			pattern_assembler.process_pattern_recursive('test/files/_patterns/00-test/09-bookend.mustache', pl, {});
 
