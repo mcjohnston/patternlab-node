@@ -1,11 +1,12 @@
 (function () {
 "use strict";
 
-	var of = require('../core/lib/object_factory');
+  var of = require('../core/lib/object_factory');
+  var Pattern = require('../core/lib/object_factory').Pattern;
 
 	exports['Pattern initialization'] = {
 		'test Pattern initializes correctly' : function(test){
-			var p = new of.Pattern('source/_patterns/00-atoms/00-global/00-colors.mustache', '00-atoms/00-global', '00-colors.mustache', { d: 123});
+			var p = new Pattern('source/_patterns/00-atoms/00-global/00-colors.mustache', '00-atoms/00-global', '00-colors.mustache', { d: 123});
 			test.equals(p.name, '00-atoms-00-global-00-colors');
 			test.equals(p.abspath, 'source/_patterns/00-atoms/00-global/00-colors.mustache');
 			test.equals(p.subdir, '00-atoms/00-global');
@@ -28,13 +29,13 @@
 			test.done();
 		},
 		'test Pattern capitalizes patternDisplayName correctly' : function(test){
-			var p = new of.Pattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', '00-atoms/00-global', '00-colors-alt.mustache', { d: 123});
+			var p = new Pattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', '00-atoms/00-global', '00-colors-alt.mustache', { d: 123});
 			test.equals(p.patternName, 'colors-alt');
 			test.equals(p.patternDisplayName, 'Colors Alt');
 			test.done();
 		},
 		'test Pattern removes pattern paramter from key correctly' : function(test){
-			var p = new of.Pattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', '00-atoms/00-global', '00-colors-alt.mustache', { d: 123});
+			var p = new Pattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', '00-atoms/00-global', '00-colors-alt.mustache', { d: 123});
 			test.equals(p.patternName, 'colors-alt');
 			test.equals(p.patternDisplayName, 'Colors Alt');
 			test.done();

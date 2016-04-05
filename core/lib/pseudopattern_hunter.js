@@ -17,7 +17,7 @@ var pseudopattern_hunter = function () {
       fs = require('fs-extra'),
       pa = require('./pattern_assembler'),
       lh = require('./lineage_hunter'),
-      of = require('./object_factory'),
+      Pattern = require('./object_factory').Pattern,
       plutils = require('./utilities'),
       path = require('path');
 
@@ -50,7 +50,7 @@ var pseudopattern_hunter = function () {
         var variantName = pseudoPatterns[i].substring(pseudoPatterns[i].indexOf('~') + 1).split('.')[0];
         var variantFilePath = path.resolve(paths.source.patterns, currentPattern.subdir, currentPattern.fileName + '~' + variantName + '.json');
         var variantFileName = currentPattern.fileName + '-' + variantName + '.';
-        var patternVariant = of.Pattern.create(variantFilePath, currentPattern.subdir, variantFileName, variantFileData, {
+        var patternVariant = Pattern.create(variantFilePath, currentPattern.subdir, variantFileName, variantFileData, {
           //use the same template as the non-variant
           template: currentPattern.template,
           extendedTemplate: currentPattern.extendedTemplate,

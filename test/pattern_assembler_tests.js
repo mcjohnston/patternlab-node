@@ -2,7 +2,7 @@
 	"use strict";
 
 	var pa = require('../core/lib/pattern_assembler');
-  var object_factory = require('../core/lib/object_factory');
+  var Pattern = require('../core/lib/object_factory').Pattern;
   var path = require('path');
 
 	exports['pattern_assembler'] = {
@@ -18,7 +18,7 @@
       // setup current pattern from what we would have during execution
       // docs on partial syntax are here:
       // http://patternlab.io/docs/pattern-including.html
-      var currentPattern = object_factory.Pattern.create(
+      var currentPattern = Pattern.create(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -70,7 +70,7 @@
       test.expect(3);
 
 			//setup current pattern from what we would have during execution
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -89,7 +89,7 @@
 
 			//setup current pattern from what we would have during execution
 
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -110,7 +110,7 @@
 
 			//setup current pattern from what we would have during execution
 
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -128,7 +128,7 @@
       test.expect(2);
 
 			//setup current pattern from what we would have during execution
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -146,7 +146,7 @@
       test.expect(1);
 
 			//setup current pattern from what we would have during execution
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -163,7 +163,7 @@
       test.expect(1);
 
 			//setup current pattern from what we would have during execution
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -180,7 +180,7 @@
       test.expect(2);
 
 			//setup current pattern from what we would have during execution
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -199,7 +199,7 @@
       test.expect(2);
 
 			//setup current pattern from what we would have during execution
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -217,7 +217,7 @@
       test.expect(2);
 
 			//setup current pattern from what we would have during execution
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -235,7 +235,7 @@
       test.expect(1);
 
 			//setup current pattern from what we would have during execution
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -252,7 +252,7 @@
       test.expect(1);
 
 			//setup current pattern from what we would have during execution
-      var currentPattern = new object_factory.Pattern(
+      var currentPattern = new Pattern(
         '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.mustache', // abspath
         '01-molecules\\00-testing', // subdir
         '00-test-mol.mustache', // filename,
@@ -375,11 +375,11 @@
 			pl.patterns = [];
 			pl.partials = {};
 
-			var atomPattern = new object_factory.Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
+			var atomPattern = new Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
 			atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
 			atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
 
-			var groupPattern = new object_factory.Pattern('test/files/_patterns/00-test/04-group.mustache', '00-test', '04-group.mustache');
+			var groupPattern = new Pattern('test/files/_patterns/00-test/04-group.mustache', '00-test', '04-group.mustache');
 			groupPattern.template = fs.readFileSync(patterns_dir + '/00-test/04-group.mustache', 'utf8');
 			groupPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(groupPattern);
 
@@ -414,12 +414,12 @@
 			pl.patterns = [];
 			pl.partials = {};
 
-			var atomPattern = new object_factory.Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
+			var atomPattern = new Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
 			atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
 			atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
 			atomPattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(atomPattern);
 
-			var groupPattern = new object_factory.Pattern('test/files/_patterns/00-test/10-multiple-classes-numeric.mustache', '00-test', '10-multiple-classes-numeric.mustache');
+			var groupPattern = new Pattern('test/files/_patterns/00-test/10-multiple-classes-numeric.mustache', '00-test', '10-multiple-classes-numeric.mustache');
 			groupPattern.template = fs.readFileSync(patterns_dir + '/00-test/10-multiple-classes-numeric.mustache', 'utf8');
 			groupPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(groupPattern);
 			groupPattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(groupPattern);
@@ -455,11 +455,11 @@
 			pl.patterns = [];
 			pl.partials = {};
 
-			var atomPattern = new object_factory.Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
+			var atomPattern = new Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
 			atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
 			atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
 
-			var mixedPattern = new object_factory.Pattern('test/files/_patterns/00-test/06-mixed.mustache', '00-test', '06-mixed.mustache');
+			var mixedPattern = new Pattern('test/files/_patterns/00-test/06-mixed.mustache', '00-test', '06-mixed.mustache');
 			mixedPattern.template = fs.readFileSync(patterns_dir + '/00-test/06-mixed.mustache', 'utf8');
 			mixedPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(mixedPattern);
 
@@ -494,11 +494,11 @@
 			pl.patterns = [];
 			pl.partials = {};
 
-			var atomPattern = new object_factory.Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
+			var atomPattern = new Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
 			atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
 			atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
 
-			var bookendPattern = new object_factory.Pattern('test/files/_patterns/00-test/09-bookend.mustache', '00-test', '09-bookend.mustache');
+			var bookendPattern = new Pattern('test/files/_patterns/00-test/09-bookend.mustache', '00-test', '09-bookend.mustache');
 			bookendPattern.template = fs.readFileSync(patterns_dir + '/00-test/09-bookend.mustache', 'utf8');
 			bookendPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(bookendPattern);
 
@@ -536,12 +536,12 @@
 			pl.patterns = [];
 			pl.partials = {};
 
-			var atomPattern = new object_factory.Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
+			var atomPattern = new Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
 			atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
 			atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
 			atomPattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(atomPattern);
 
-			var mixedPattern = new object_factory.Pattern('test/files/_patterns/00-test/07-mixed-params.mustache', '00-test', '07-mixed-params.mustache');
+			var mixedPattern = new Pattern('test/files/_patterns/00-test/07-mixed-params.mustache', '00-test', '07-mixed-params.mustache');
 			mixedPattern.template = fs.readFileSync(patterns_dir + '/00-test/07-mixed-params.mustache', 'utf8');
 			mixedPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(mixedPattern);
       		mixedPattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(mixedPattern);
@@ -577,12 +577,12 @@
 			pl.patterns = [];
 			pl.partials = {};
 
-			var atomPattern = new object_factory.Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
+			var atomPattern = new Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
 			atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
 			atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
       		atomPattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(atomPattern);
 
-			var bookendPattern = new object_factory.Pattern('test/files/_patterns/00-test/08-bookend-params.mustache', '00-test', '08-bookend-params.mustache');
+			var bookendPattern = new Pattern('test/files/_patterns/00-test/08-bookend-params.mustache', '00-test', '08-bookend-params.mustache');
 			bookendPattern.template = fs.readFileSync(patterns_dir + '/00-test/08-bookend-params.mustache', 'utf8');
 			bookendPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(bookendPattern);
       		bookendPattern.parameteredPartials = pattern_assembler.find_pattern_partials_with_parameters(bookendPattern);
@@ -814,7 +814,7 @@
 			patternlab.partials = {};
 			patternlab.data = {link: {}};
 
-			var pattern = new object_factory.Pattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
+			var pattern = new Pattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
 			pattern.extendedTemplate = 'barExtended';
 			pattern.template = 'bar';
 
@@ -835,7 +835,7 @@
 			patternlab.partials = {};
 			patternlab.data = {link: {}};
 
-			var pattern = new object_factory.Pattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
+			var pattern = new Pattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
 			pattern.extendedTemplate = undefined;
 			pattern.template = 'bar';
 

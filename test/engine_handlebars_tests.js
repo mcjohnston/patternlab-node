@@ -6,7 +6,7 @@ catch (err) { return; }
 
 var path = require('path');
 var pa = require('../core/lib/pattern_assembler');
-var object_factory = require('../core/lib/object_factory');
+var Pattern = require('../core/lib/object_factory').Pattern;
 var testPatternsPath = path.resolve(__dirname, 'files', '_handlebars-test-patterns');
 
 try {
@@ -49,7 +49,7 @@ function testFindPartials(test, partialTests) {
   // setup current pattern from what we would have during execution
   // docs on partial syntax are here:
   // http://patternlab.io/docs/pattern-including.html
-  var currentPattern = object_factory.Pattern.create(
+  var currentPattern = Pattern.create(
     '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.hbs', // abspath
     '01-molecules\\00-testing', // subdir
     '00-test-mol.hbs', // filename,
