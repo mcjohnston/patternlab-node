@@ -127,16 +127,17 @@ var pattern_assembler = function () {
     }
   }
 
-  function processPatternIterative(file, patternlab) {
+  function processPatternIterative(relPath, patternlab) {
     //extract some information
-    var filename = path.basename(file);
+    var filename = path.basename(relPath);
     var ext = path.extname(filename);
+    var patternsPath = patternlab.config.paths.source.patterns;
 
     // skip non-pattern files
     if (!patternEngines.isPatternFile(filename, patternlab)) { return null; }
 
     //make a new Pattern Object
-    var currentPattern = new Pattern(file);
+    var currentPattern = new Pattern(relPath);
 
     //if file is named in the syntax for variants
     if (patternEngines.isPseudoPatternJSON(filename)) {
@@ -153,7 +154,7 @@ var pattern_assembler = function () {
 
     //look for a json file for this template
     try {
-      var jsonFilename = path.resolve(patternlab.config.paths.source.patterns, currentPattern.subdir, currentPattern.fileName + ".json");
+      var jsonFilename = path.resolve(patternsPath, currentPattern.subdir, currentPattern.fileName + ".json");
       currentPattern.jsonFileData = fs.readJSONSync(jsonFilename);
       if (patternlab.config.debug) {
         console.log('processPatternIterative: found pattern-specific data.json for ' + currentPattern.key);
@@ -165,7 +166,7 @@ var pattern_assembler = function () {
 
     //look for a listitems.json file for this template
     try {
-      var listJsonFileName = path.resolve(patternlab.config.paths.source.patterns, currentPattern.subdir, currentPattern.fileName + ".listitems.json");
+      var listJsonFileName = path.resolve(patternsPath, currentPattern.subdir, currentPattern.fileName + ".listitems.json");
       currentPattern.listitems = fs.readJSONSync(listJsonFileName);
       buildListItems(currentPattern);
       if (patternlab.config.debug) {
@@ -177,7 +178,7 @@ var pattern_assembler = function () {
     }
 
     //add the raw template to memory
-    currentPattern.template = fs.readFileSync(file, 'utf8');
+    currentPattern.template = fs.readFileSync(path.resolve(patternsPath, relPath), 'utf8');
 
     //find any stylemodifiers that may be in the current pattern
     currentPattern.stylePartials = currentPattern.findPartialsWithStyleModifiers();
