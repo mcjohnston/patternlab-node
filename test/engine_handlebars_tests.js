@@ -49,7 +49,7 @@ function testFindPartials(test, partialTests) {
   // setup current pattern from what we would have during execution
   // docs on partial syntax are here:
   // http://patternlab.io/docs/pattern-including.html
-  var currentPattern = object_factory.oPattern.create(
+  var currentPattern = object_factory.Pattern.create(
     '/home/fakeuser/pl/source/_patterns/01-molecules/00-testing/00-test-mol.hbs', // abspath
     '01-molecules\\00-testing', // subdir
     '00-test-mol.hbs', // filename,

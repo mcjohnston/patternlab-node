@@ -5,9 +5,9 @@
   var of = require('../core/lib/object_factory');
 
   // the mustache test pattern, stolen from object_factory unit tests
-  var mustacheTestPattern = new of.oPattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', '00-atoms/00-global', '00-colors-alt.mustache', {d: 123});
-  var mustacheTestPseudoPatternBasePattern = new of.oPattern('source/_patterns/04-pages/00-homepage.mustache', '04-pages', '00-homepage.mustache', {d: 123});
-  var mustacheTestPseudoPattern = new of.oPattern('source/_patterns/04-pages/00-homepage~emergency.json', '04-pages', '00-homepage-emergency.', {d: 123});
+  var mustacheTestPattern = new of.Pattern('source/_patterns/00-atoms/00-global/00-colors-alt.mustache', '00-atoms/00-global', '00-colors-alt.mustache', {d: 123});
+  var mustacheTestPseudoPatternBasePattern = new of.Pattern('source/_patterns/04-pages/00-homepage.mustache', '04-pages', '00-homepage.mustache', {d: 123});
+  var mustacheTestPseudoPattern = new of.Pattern('source/_patterns/04-pages/00-homepage~emergency.json', '04-pages', '00-homepage-emergency.', {d: 123});
   mustacheTestPseudoPattern.isPseudoPattern = true;
   mustacheTestPseudoPattern.basePattern = mustacheTestPseudoPatternBasePattern;
   var engineNames = Object.keys(patternEngines);
@@ -26,7 +26,7 @@
     },
     'getEngineNameForPattern returns "mustache" for an artificial empty template': function (test) {
       test.expect(1);
-      var emptyPattern = of.oPattern.createEmpty();
+      var emptyPattern = of.Pattern.createEmpty();
       test.equals(patternEngines.getEngineNameForPattern(emptyPattern), 'mustache');
       test.done();
     },

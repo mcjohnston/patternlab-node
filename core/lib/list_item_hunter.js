@@ -68,7 +68,7 @@ var list_item_hunter = function () {
           allData.link = extend({}, patternlab.data.link);
 
           //check for partials within the repeated block
-          var foundPartials = of.oPattern.createEmpty({'template': thisBlockTemplate}).findPartials();
+          var foundPartials = of.Pattern.createEmpty({'template': thisBlockTemplate}).findPartials();
 
           if (foundPartials && foundPartials.length > 0) {
 

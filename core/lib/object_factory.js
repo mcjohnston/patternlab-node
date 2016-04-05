@@ -14,9 +14,9 @@ var patternEngines = require('./pattern_engines/pattern_engines');
 var path = require('path');
 var extend = require('util')._extend;
 
-// oPattern properties
+// Pattern properties
 
-var oPattern = function (abspath, subdir, filename, data) {
+var Pattern = function (abspath, subdir, filename, data) {
   this.fileName = filename.substring(0, filename.indexOf('.'));
   this.fileExtension = path.extname(abspath);
   this.abspath = abspath;
@@ -42,9 +42,9 @@ var oPattern = function (abspath, subdir, filename, data) {
   this.engine = patternEngines.getEngineForPattern(this);
 };
 
-// oPattern methods
+// Pattern methods
 
-oPattern.prototype = {
+Pattern.prototype = {
 
   // render method on oPatterns; this acts as a proxy for the PatternEngine's
   // render function
@@ -81,20 +81,20 @@ oPattern.prototype = {
   }
 };
 
-// oPattern static methods
+// Pattern static methods
 
-// factory: creates an empty oPattern for miscellaneous internal use, such as
+// factory: creates an empty Pattern for miscellaneous internal use, such as
 // by list_item_hunter
-oPattern.createEmpty = function (customProps) {
-  var pattern = new oPattern('', '', '', null);
+Pattern.createEmpty = function (customProps) {
+  var pattern = new Pattern('', '', '', null);
   return extend(pattern, customProps);
 };
 
-// factory: creates an oPattern object on-demand from a hash; the hash accepts
-// parameters that replace the positional parameters that the oPattern
+// factory: creates an Pattern object on-demand from a hash; the hash accepts
+// parameters that replace the positional parameters that the Pattern
 // constructor takes.
-oPattern.create = function (abspath, subdir, filename, data, customProps) {
-  var newPattern = new oPattern(abspath || '', subdir || '', filename || '', data || null);
+Pattern.create = function (abspath, subdir, filename, data, customProps) {
+  var newPattern = new Pattern(abspath || '', subdir || '', filename || '', data || null);
   return extend(newPattern, customProps);
 };
 
@@ -131,7 +131,7 @@ var oNavSubItem = function (name) {
 
 
 module.exports = {
-  oPattern: oPattern,
+  Pattern: Pattern,
   oBucket: oBucket,
   oNavItem: oNavItem,
   oNavSubItem: oNavSubItem

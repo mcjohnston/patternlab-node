@@ -13,7 +13,7 @@
       filename: '00-list.mustache',
       data: {}
     };
-    var pattern = new of.oPattern(inputs.abspath, inputs.subdir, inputs.filename, inputs.data);
+    var pattern = new of.Pattern(inputs.abspath, inputs.subdir, inputs.filename, inputs.data);
 
     return extend(pattern, customProps);
   }
@@ -128,11 +128,11 @@
 
       var patternlab = createFakePatternLab({
         "patterns": [
-          of.oPattern.create('/home/fakeuser/pl/source/_patterns/00-atoms/00-test/00-foo.mustache', "00-atoms/00-test", "00-foo.mustache", null, {
+          of.Pattern.create('/home/fakeuser/pl/source/_patterns/00-atoms/00-test/00-foo.mustache', "00-atoms/00-test", "00-foo.mustache", null, {
             "template": "{{ title }}",
             "extendedTemplate": "{{ title }}"
           }),
-          of.oPattern.create('/home/fakeuser/pl/source/_patterns/00-atoms/00-test/00-bar.mustache', "00-atoms/00-test", "00-bar.mustache", null, {
+          of.Pattern.create('/home/fakeuser/pl/source/_patterns/00-atoms/00-test/00-bar.mustache', "00-atoms/00-test", "00-bar.mustache", null, {
             "template": "{{ title }}",
             "extendedTemplate": "{{ title }}"
           })
@@ -317,12 +317,12 @@
         ]
       };
 
-      var atomPattern = new of.oPattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
+      var atomPattern = new of.Pattern('test/files/_patterns/00-test/03-styled-atom.mustache', '00-test', '03-styled-atom.mustache');
       atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
       atomPattern.extendedTemplate = atomPattern.template;
       atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
 
-      var bookendPattern = new of.oPattern('test/files/_patterns/00-test/11-bookend-listitem.mustache', '00-test', '11-bookend-listitem.mustache');
+      var bookendPattern = new of.Pattern('test/files/_patterns/00-test/11-bookend-listitem.mustache', '00-test', '11-bookend-listitem.mustache');
       bookendPattern.template = fs.readFileSync(patterns_dir + '/00-test/11-bookend-listitem.mustache', 'utf8');
       bookendPattern.extendedTemplate = bookendPattern.template;
       bookendPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(bookendPattern);

@@ -11,7 +11,7 @@ var lineage_hunter = new lh();
 
 // fake pattern creators
 function createFakeEmptyErrorPattern() {
-  return new of.oPattern(
+  return new of.Pattern(
     '/home/fakeuser/pl/source/_patterns/01-molecules/01-toast/00-error.mustache', // abspath
     '01-molecules\\01-toast', // subdir
     '00-error.mustache', // filename,
@@ -42,7 +42,7 @@ exports['lineage hunter '] = {
   'find_lineage - finds lineage' : function (test) {
 
     //setup current pattern from what we would have during execution
-    var currentPattern = new of.oPattern(
+    var currentPattern = new of.Pattern(
       '/home/fakeuser/pl/source/_patterns/02-organisms/00-global/00-header.mustache', // abspath
       '02-organisms\\00-global', // subdir
       '00-header.mustache', // filename,
@@ -136,7 +136,7 @@ exports['lineage hunter '] = {
 
     var patternlab = {
       patterns: [
-        of.oPattern.create(
+        of.Pattern.create(
           '/home/fakeuser/pl/source/_patterns/00-atoms/05-alerts/00-error.mustache',
           '00-atoms\\05-alerts',
           '00-error.mustache',
@@ -203,7 +203,7 @@ exports['lineage hunter '] = {
 
   'find_lineage - finds lineage with spaced styleModifier' : function (test) {
     //setup current pattern from what we would have during execution
-    var currentPattern = of.oPattern.createEmpty({
+    var currentPattern = of.Pattern.createEmpty({
       "name": "01-molecules-01-toast-00-error",
       "subdir": "01-molecules\\01-toast",
       "filename": "00-error.mustache",
@@ -224,7 +224,7 @@ exports['lineage hunter '] = {
     });
     var patternlab = {
       patterns: [
-        of.oPattern.createEmpty({
+        of.Pattern.createEmpty({
           "name": "01-atoms-05-alerts-00-error",
           "subdir": "01-atoms\\05-alerts",
           "filename": "00-error.mustache",
@@ -257,7 +257,7 @@ exports['lineage hunter '] = {
 
   'find_lineage - finds lineage with unspaced styleModifier' : function (test) {
     //setup current pattern from what we would have during execution
-    var currentPattern = of.oPattern.createEmpty({
+    var currentPattern = of.Pattern.createEmpty({
       "name": "01-molecules-01-toast-00-error",
       "subdir": "01-molecules\\01-toast",
       "filename": "00-error.mustache",
@@ -278,7 +278,7 @@ exports['lineage hunter '] = {
     });
     var patternlab = {
       patterns: [
-        of.oPattern.createEmpty({
+        of.Pattern.createEmpty({
           "name": "01-atoms-05-alerts-00-error",
           "subdir": "01-atoms\\05-alerts",
           "filename": "00-error.mustache",
@@ -311,7 +311,7 @@ exports['lineage hunter '] = {
 
   'find_lineage - finds lineage with fuzzy partial with styleModifier' : function (test) {
     //setup current pattern from what we would have during execution
-    var currentPattern = of.oPattern.createEmpty({
+    var currentPattern = of.Pattern.createEmpty({
       "name": "01-molecules-01-toast-00-error",
       "subdir": "01-molecules\\01-toast",
       "filename": "00-error.mustache",
@@ -332,7 +332,7 @@ exports['lineage hunter '] = {
     });
     var patternlab = {
       patterns: [
-        of.oPattern.createEmpty({
+        of.Pattern.createEmpty({
           "name": "01-atoms-05-alerts-00-error",
           "subdir": "01-atoms\\05-alerts",
           "filename": "00-error.mustache",
@@ -414,14 +414,14 @@ exports['lineage hunter '] = {
       "test-bar" : "inreview"
     };
 
-    var atomPattern = new of.oPattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
+    var atomPattern = new of.Pattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
     atomPattern.template = fs.readFileSync(pl.config.paths.source.patterns + '00-test/01-bar.mustache', 'utf8');
     atomPattern.extendedTemplate = atomPattern.template;
 
     pattern_assembler.setPatternState(atomPattern, pl);
     pattern_assembler.addPattern(atomPattern, pl);
 
-    var consumerPattern = new of.oPattern('test/files/_patterns/00-test/00-foo.mustache', '00-test', '00-foo.mustache');
+    var consumerPattern = new of.Pattern('test/files/_patterns/00-test/00-foo.mustache', '00-test', '00-foo.mustache');
     consumerPattern.template = fs.readFileSync(pl.config.paths.source.patterns + '00-test/00-foo.mustache', 'utf8');
     consumerPattern.extendedTemplate = consumerPattern.template;
     pattern_assembler.setPatternState(consumerPattern, pl);
@@ -446,14 +446,14 @@ exports['lineage hunter '] = {
       "test-bar" : "inreview"
     };
 
-    var atomPattern = new of.oPattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
+    var atomPattern = new of.Pattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
     atomPattern.template = fs.readFileSync(pl.config.paths.source.patterns + '00-test/01-bar.mustache', 'utf8');
     atomPattern.extendedTemplate = atomPattern.template;
 
     pattern_assembler.setPatternState(atomPattern, pl);
     pattern_assembler.addPattern(atomPattern, pl);
 
-    var consumerPattern = new of.oPattern('test/files/_patterns/00-test/00-foo.mustache', '00-test', '00-foo.mustache');
+    var consumerPattern = new of.Pattern('test/files/_patterns/00-test/00-foo.mustache', '00-test', '00-foo.mustache');
     consumerPattern.template = fs.readFileSync(pl.config.paths.source.patterns + '00-test/00-foo.mustache', 'utf8');
     consumerPattern.extendedTemplate = consumerPattern.template;
     pattern_assembler.setPatternState(consumerPattern, pl);
@@ -478,14 +478,14 @@ exports['lineage hunter '] = {
       "test-bar" : "inreview"
     };
 
-    var atomPattern = new of.oPattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
+    var atomPattern = new of.Pattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
     atomPattern.template = fs.readFileSync(pl.config.paths.source.patterns + '00-test/01-bar.mustache', 'utf8');
     atomPattern.extendedTemplate = atomPattern.template;
 
     pattern_assembler.setPatternState(atomPattern, pl);
     pattern_assembler.addPattern(atomPattern, pl);
 
-    var consumerPattern = new of.oPattern('test/files/_patterns/00-test/00-foo.mustache', '00-test', '00-foo.mustache');
+    var consumerPattern = new of.Pattern('test/files/_patterns/00-test/00-foo.mustache', '00-test', '00-foo.mustache');
     consumerPattern.template = fs.readFileSync(pl.config.paths.source.patterns + '00-test/00-foo.mustache', 'utf8');
     consumerPattern.extendedTemplate = consumerPattern.template;
     pattern_assembler.setPatternState(consumerPattern, pl);
@@ -510,14 +510,14 @@ exports['lineage hunter '] = {
       "test-bar" : "inreview"
     };
 
-    var atomPattern = new of.oPattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
+    var atomPattern = new of.Pattern('test/files/_patterns/00-test/01-bar.mustache', '00-test', '01-bar.mustache');
     atomPattern.template = fs.readFileSync(pl.config.paths.source.patterns + '00-test/01-bar.mustache', 'utf8');
     atomPattern.extendedTemplate = atomPattern.template;
 
     pattern_assembler.setPatternState(atomPattern, pl);
     pattern_assembler.addPattern(atomPattern, pl);
 
-    var consumerPattern = new of.oPattern('test/files/_patterns/00-test/00-foo.mustache', '00-test', '00-foo.mustache');
+    var consumerPattern = new of.Pattern('test/files/_patterns/00-test/00-foo.mustache', '00-test', '00-foo.mustache');
     consumerPattern.template = fs.readFileSync(pl.config.paths.source.patterns + '00-test/00-foo.mustache', 'utf8');
     consumerPattern.extendedTemplate = consumerPattern.template;
     pattern_assembler.setPatternState(consumerPattern, pl);

@@ -114,15 +114,15 @@ var pattern_assembler = function () {
 
   // Render a pattern on request. Long-term, this should probably go away.
   function renderPattern(pattern, data, partials) {
-    // if we've been passed a full oPattern, it knows what kind of template it
+    // if we've been passed a full Pattern, it knows what kind of template it
     // is, and how to render itself, so we just call its render method
-    if (pattern instanceof of.oPattern) {
+    if (pattern instanceof of.Pattern) {
       return pattern.render(data, partials);
     } else {
       // otherwise, assume it's a plain mustache template string, and we
       // therefore just need to create a dummpy pattern to be able to render
       // it
-      var dummyPattern = of.oPattern.createEmpty({extendedTemplate: pattern});
+      var dummyPattern = of.Pattern.createEmpty({extendedTemplate: pattern});
       return patternEngines.mustache.renderPattern(dummyPattern, data, partials);
     }
   }
@@ -137,7 +137,7 @@ var pattern_assembler = function () {
     if (!patternEngines.isPatternFile(filename, patternlab)) { return null; }
 
     //make a new Pattern Object
-    var currentPattern = new of.oPattern(file, subdir, filename);
+    var currentPattern = new of.Pattern(file, subdir, filename);
 
     //if file is named in the syntax for variants
     if (patternEngines.isPseudoPatternJSON(filename)) {
