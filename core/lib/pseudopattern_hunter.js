@@ -46,7 +46,7 @@ var pseudopattern_hunter = function () {
 
         //extend any existing data with variant data
         variantFileData = plutils.mergeData(currentPattern.jsonFileData, variantFileData);
-
+        
         var variantName = pseudoPatterns[i].substring(pseudoPatterns[i].indexOf('~') + 1).split('.')[0];
         var variantFilePath = path.join(currentPattern.subdir, currentPattern.fileName + '~' + variantName + '.json');
         var patternVariant = Pattern.create(variantFilePath, variantFileData, {
