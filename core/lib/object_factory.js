@@ -110,7 +110,7 @@ Pattern.prototype = {
 // factory: creates an empty Pattern for miscellaneous internal use, such as
 // by list_item_hunter
 Pattern.createEmpty = function (customProps) {
-  var pattern = new Pattern('', '', '', null);
+  var pattern = new Pattern('', null);
   return extend(pattern, customProps);
 };
 
