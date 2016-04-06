@@ -126,11 +126,11 @@
 
       var patternlab = createFakePatternLab({
         "patterns": [
-          Pattern.create('/home/fakeuser/pl/source/_patterns/00-atoms/00-test/00-foo.mustache', "00-atoms/00-test", "00-foo.mustache", null, {
+          Pattern.create('00-atoms/00-test/00-foo.mustache', null, {
             "template": "{{ title }}",
             "extendedTemplate": "{{ title }}"
           }),
-          Pattern.create('/home/fakeuser/pl/source/_patterns/00-atoms/00-test/00-bar.mustache', "00-atoms/00-test", "00-bar.mustache", null, {
+          Pattern.create('00-atoms/00-test/00-bar.mustache', null, {
             "template": "{{ title }}",
             "extendedTemplate": "{{ title }}"
           })
@@ -298,7 +298,7 @@
       pl.config.debug = false;
       pl.patterns = [];
       pl.partials = {};
-      pl.config.patterns = { source: patterns_dir};
+      pl.config.patterns = { source: patterns_dir };
       pl.listitems = {
         "1": [
            {
@@ -315,12 +315,12 @@
         ]
       };
 
-      var atomPattern = new Pattern('test/files/_patterns/00-test/03-styled-atom.mustache');
+      var atomPattern = new Pattern('00-test/03-styled-atom.mustache');
       atomPattern.template = fs.readFileSync(patterns_dir + '/00-test/03-styled-atom.mustache', 'utf8');
       atomPattern.extendedTemplate = atomPattern.template;
       atomPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(atomPattern);
 
-      var bookendPattern = new Pattern('test/files/_patterns/00-test/11-bookend-listitem.mustache');
+      var bookendPattern = new Pattern('00-test/11-bookend-listitem.mustache');
       bookendPattern.template = fs.readFileSync(patterns_dir + '/00-test/11-bookend-listitem.mustache', 'utf8');
       bookendPattern.extendedTemplate = bookendPattern.template;
       bookendPattern.stylePartials = pattern_assembler.find_pattern_partials_with_style_modifiers(bookendPattern);
