@@ -2,7 +2,7 @@
 Changes over normal PL:N release
 - Default to using Gulp
 - Add Gulp SASS task with concat, min, and sourcemaps
-- Reorder some of the tasks and build processes to relod on .mustache changes
+- Reorder some of the tasks and build processes to reload on .mustache changesgit 
 
 [![Build Status](https://travis-ci.org/pattern-lab/patternlab-node.png?branch=master)](https://travis-ci.org/pattern-lab/patternlab-node)
 
