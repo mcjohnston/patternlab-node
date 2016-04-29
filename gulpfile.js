@@ -1,16 +1,23 @@
 // Special thanks to oscar-g (https://github.com/oscar-g) for starting this at
 // https://github.com/oscar-g/patternlab-node/tree/dev-gulp
 
-var pkg = require('./package.json'),
-    gulp = require('gulp'),
-    path = require('path'),
-    eol = require('os').EOL,
-    del = require('del'),
-    strip_banner = require('gulp-strip-banner'),
-    header = require('gulp-header'),
-    nodeunit = require('gulp-nodeunit'),
-    eslint = require('gulp-eslint'),
-    browserSync = require('browser-sync').create();
+var pkg = require('./package.json');
+var gulp = require('gulp');
+var path = require('path');
+var eol = require('os').EOL;
+var del = require('del');
+var strip_banner = require('gulp-strip-banner');
+var header = require('gulp-header');
+var nodeunit = require('gulp-nodeunit');
+var eslint = require('gulp-eslint');
+var browserSync = require('browser-sync').create();
+
+// gulp plugins
+var sass = require('gulp-sass');
+var rename = require('gulp-rename');
+var sourcemaps = require('gulp-sourcemaps');
+var concat = require('gulp-concat');
+var cleanCSS = require('gulp-clean-css');
 
 require('gulp-load')(gulp);
 var banner = [ '/** ',
@@ -104,6 +111,16 @@ gulp.task('cp:styleguide', function () {
       .pipe(browserSync.stream());
 });
 
+// add SASS support with sourcemaps
+gulp.task('sass', function () {
+  return gulp.src('./source/scss/**/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(concat('style.css'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./source/css'));
+});
+
 // server and watch tasks
 gulp.task('connect', ['lab'], function () {
   browserSync.init({
@@ -137,9 +154,15 @@ gulp.task('connect', ['lab'], function () {
 
   gulp.watch(path.resolve(paths().source.styleguide, '**/*.*'), ['cp:styleguide']);
 
+  //gulp.watch(
+    //path.resolve(paths().source.patterns, '**/*.mustache'),
+    //['build'],
+    //function () { browserSync.reload(); }
+  //);
+
   gulp.watch(
     [
-      path.resolve(paths().source.patterns, '**/*.mustache'),
+      path.resolve(paths().source.patterns, '**/*.mustache'),    
       path.resolve(paths().source.patterns, '**/*.json'),
       path.resolve(paths().source.data, '*.json'),
       path.resolve(paths().source.fonts + '/*'),
@@ -148,6 +171,13 @@ gulp.task('connect', ['lab'], function () {
     ],
     ['lab-pipe'],
     function () { browserSync.reload(); }
+  );
+
+  // Added SASS Bits
+  gulp.watch(
+    path.resolve(paths().source.scss, '**/*.scss'),
+    ['sass'],
+    function () { browserSync.reload(); }    
   );
 
 });
@@ -172,14 +202,17 @@ gulp.task('lab-pipe', ['lab'], function (cb) {
   browserSync.reload();
 });
 
-gulp.task('default', ['lab']);
+gulp.task('default', ['serve']);
 
-gulp.task('assets', ['cp:js', 'cp:img', 'cp:font', 'cp:data', 'cp:css', 'cp:styleguide' ]);
+gulp.task('assets', ['cp:js', 'cp:img', 'cp:font', 'cp:data', 'sass', 'cp:css', 'cp:styleguide' ]);
 gulp.task('prelab', ['clean', 'assets']);
 gulp.task('lab', ['prelab', 'patternlab'], function (cb) { cb(); });
 gulp.task('patterns', ['patternlab:only_patterns']);
 gulp.task('serve', ['lab', 'connect']);
-gulp.task('build', ['eslint', 'nodeunit', 'banner']);
+gulp.task('build', ['eslint', 'nodeunit', 'banner'], function (cb) {
+  cb();
+  browserSync.reload();
+});
 
 gulp.task('version', ['patternlab:version']);
 gulp.task('help', ['patternlab:help']);
